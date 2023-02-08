@@ -1,0 +1,91 @@
+import java.io.*;
+import java.util.*;
+
+ class Student  {
+        private String name;
+        private int rollNo;
+        private int year;
+        private String branch;
+        private ArrayList<Integer> listOfMarks;
+        double percentage;
+         static int numberOfStuds=0 ;
+      
+        Student(String name, int rollNo,String branch, int year ){
+            this.name = name;
+            this.rollNo =rollNo;
+            this.branch = branch;
+            this.year = year;
+            listOfMarks = new ArrayList<>();
+             numberOfStuds++;
+        }  
+        public void setListOfMarks( int marks){
+            listOfMarks.add(marks);
+        }
+        public String getName(){
+            return name;
+        }   
+         public int getRollNo(){
+            return rollNo;
+        }
+         public int getYear(){
+            return this.year;
+        }    
+         public String getBranch(){
+            return this.branch;
+        } 
+        public void display(){
+            System.out.println( rollNo + " "+name+" "+branch+" "+year);
+        }
+        public double computePercentage(){
+            double sum = 0;
+            for(int  i=0 ;i<listOfMarks.size() ;i++){
+                sum += listOfMarks.get(i);
+            }
+            percentage  = ((sum)/listOfMarks.size());
+            return percentage;
+        }
+        
+  
+        public static void displayNoStuds(){
+            System.out.println("NoOfStudents="+numberOfStuds);
+        }
+        
+        
+    }
+
+
+ class Solution{
+    
+      
+
+    
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner in = new Scanner(System.in);
+       
+
+        int n = Integer.parseInt(in.nextLine());
+        List<Student> students = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            String [] line = in.nextLine().split(" ");
+            Student s = new Student(line[0],Integer.parseInt(line[1]),line[2],Integer.parseInt(line[3]));
+            students.add(s);
+            Student st = students.get(i);
+            String [] nums = in.nextLine().split(" ");
+            for(int j = 0;j<nums.length;j++){
+                st.setListOfMarks(Integer.parseInt(nums[j]));
+            }
+        }
+        for(int i=0;i<n;i++){
+            students.get(i).display();
+            Student s = students.get(i);
+            System.out.print(s.getRollNo()+" ");
+            System.out.printf("%.2f",s.computePercentage());
+            System.out.println();
+
+        }
+        Student.displayNoStuds();
+        
+    }
+    
+}
