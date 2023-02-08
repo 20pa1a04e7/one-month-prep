@@ -1,0 +1,6 @@
+str = input()
+p = ""
+for i in str:
+    if i not in p:
+        p=p+i 
+print(p)
